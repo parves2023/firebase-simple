@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getAuth, createUserWithEmailAndPassword,sendEmailVerification } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, updateProfile } from "firebase/auth";
 
 
 
@@ -10,6 +10,8 @@ function Signup() {
     e.preventDefault();
     console.log(e.target.email.value);
     const email = e.target.email.value;
+    const name = e.target.name.value;
+    const Photolink = e.target.Photolink.value;
     const password = e.target.password.value;
 
     
@@ -18,18 +20,30 @@ createUserWithEmailAndPassword(auth, email, password)
     // Signed up 
     const user = userCredential.user;
     console.log(user);
+
+
+    updateProfile(auth.currentUser, {
+      displayName: name, photoURL: Photolink
+    }).then(() => {
+      console.log("// Profile updated!");
+      
+      
+    }).catch((error) => {
+      console.log(error.message);
+      
+    });
+
+
+
+
     sendEmailVerification(auth.currentUser)
   .then(() => {
-    alert("please varify your email");
+    alert("please check and varify your email.");
   });
-    
-    // ...
 })
 .catch((error) => {
-    
     const errorMessage = error.message;
     console.log(errorMessage);
-    // ..
   });
     
     
@@ -48,6 +62,30 @@ createUserWithEmailAndPassword(auth, email, password)
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <form onSubmit={handleSignUp} className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">name</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="name"
+                  name="name"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photolink</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Photolink"
+                  name="Photolink"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
