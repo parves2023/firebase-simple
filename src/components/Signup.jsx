@@ -3,12 +3,13 @@
 import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, updateProfile } from "firebase/auth";
 import { useContext } from "react";
 import AuthContex from "../provider/AuthContext";
+import app from "../firebase/firebase.init";
 
 
 
 function Signup() {
   const {name} = useContext(AuthContex);
-    const auth = getAuth();
+    const auth = getAuth(app);
    const handleSignUp = (e)=>{
     e.preventDefault();
     console.log(e.target.email.value);

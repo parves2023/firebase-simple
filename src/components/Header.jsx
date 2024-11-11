@@ -12,6 +12,8 @@ function Header() {
       <Link className="btn" to="/">home</Link>
       <Link className="btn" to="/login">Login</Link>
       <Link className="btn" to="/signup">sign up email</Link>
+      <Link className="btn" to="/contex">sign up email (contex)</Link>
+      <Link className="btn" to="/contexlogin">Login email (contex)</Link>
       <Link className="btn" to="/signin">sign in email</Link>
       
     </div>
