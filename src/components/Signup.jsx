@@ -1,10 +1,13 @@
-import React from "react";
+
 
 import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, updateProfile } from "firebase/auth";
+import { useContext } from "react";
+import AuthContex from "../provider/AuthContext";
 
 
 
 function Signup() {
+  const {name} = useContext(AuthContex);
     const auth = getAuth();
    const handleSignUp = (e)=>{
     e.preventDefault();
@@ -53,7 +56,7 @@ createUserWithEmailAndPassword(auth, email, password)
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Signup now!</h1>
+            <h1 className="text-5xl font-bold">Signup now! {name}</h1>
             <p className="py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae

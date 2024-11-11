@@ -2,7 +2,7 @@
 
 function Home() {
   return (
-    <div>
+    <div className="text-center">
        this is home
     </div>
   )

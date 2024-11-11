@@ -77,7 +77,7 @@ function Login() {
 
   return (
     <div>
-      <p>Login</p>
+      <p className="text-center">Login</p>
       {!user ? ( // Display login button if no user is logged in
         <div className="flex gap-3 justify-center my-5">
           <button className="btn" onClick={handleGoogleSignIn}>
