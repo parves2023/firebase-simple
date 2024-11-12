@@ -66,7 +66,7 @@ function ContexLogin() {
                     <button className="btn btn-primary">Signin</button>
                   </div>
                 </form>
-                <div>{user && <div>{user.email}</div>}</div>
+                <div>{user && <div>Login success</div>}</div>
               </div>
             </div>
           </div>

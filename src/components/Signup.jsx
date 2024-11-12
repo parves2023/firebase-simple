@@ -1,16 +1,20 @@
-
-
-import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, updateProfile } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
 import { useContext } from "react";
 import AuthContex from "../provider/AuthContext";
 import app from "../firebase/firebase.init";
-
-
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const {name} = useContext(AuthContex);
-    const auth = getAuth(app);
-   const handleSignUp = (e)=>{
+  const { name } = useContext(AuthContex);
+  const auth = getAuth(app);
+  const navigate = useNavigate();
+
+  const handleSignUp = (e) => {
     e.preventDefault();
     console.log(e.target.email.value);
     const email = e.target.email.value;
@@ -18,40 +22,34 @@ function Signup() {
     const Photolink = e.target.Photolink.value;
     const password = e.target.password.value;
 
-    
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    console.log(user);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log(user);
 
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: Photolink,
+        })
+          .then(() => {
+            console.log("// Profile updated!");
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
 
-    updateProfile(auth.currentUser, {
-      displayName: name, photoURL: Photolink
-    }).then(() => {
-      console.log("// Profile updated!");
-      
-      
-    }).catch((error) => {
-      console.log(error.message);
-      
-    });
-
-
-
-
-    sendEmailVerification(auth.currentUser)
-  .then(() => {
-    alert("please check and varify your email.");
-  });
-})
-.catch((error) => {
-    const errorMessage = error.message;
-    console.log(errorMessage);
-  });
-    
-    
-   }
+        sendEmailVerification(auth.currentUser).then(() => {
+          alert("please check and varify your email.");
+          e.target.reset();
+          navigate("/");
+        });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -113,9 +111,7 @@ createUserWithEmailAndPassword(auth, email, password)
                   className="input input-bordered"
                   required
                 />
-                <label className="label">
-                  
-                </label>
+                <label className="label"></label>
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Signup</button>

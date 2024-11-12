@@ -12,6 +12,8 @@ import Signin from "./components/Signin.jsx";
 import AuthProvider from "./provider/AuthProvider.jsx";
 import Contex from "./components/Contex.jsx";
 import ContexLogin from "./components/ContexLogin.jsx";
+import Orders from "./components/Orders.jsx";
+import PrivetRoute from "./components/PrivetRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
       { path: "/contex", element: <Contex></Contex> },
       { path: "/contexlogin", element: <ContexLogin></ContexLogin> },
       { path: "/signin", element: <Signin></Signin> },
+      { path: "/orders", element: <PrivetRoute><Orders></Orders></PrivetRoute> }
     ],
   },
 ]);

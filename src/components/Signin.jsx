@@ -1,13 +1,14 @@
-import { useRef, useState } from "react";
+import { useContext, useRef } from "react";
 
 import {
   getAuth,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import AuthContex from "../provider/AuthContext";
 
 function Signin() {
-  const [user, setUser] = useState(null);
+  const { user,setUser } = useContext(AuthContex);
   const emailRef = useRef();
 
   const auth = getAuth();

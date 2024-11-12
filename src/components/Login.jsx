@@ -1,11 +1,12 @@
 import { FacebookAuthProvider, getAuth, GithubAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import app from "../firebase/firebase.init";
 import { GoogleAuthProvider } from "firebase/auth";
-import { useState } from "react";
+import { useContext } from "react";
 import { OAuthProvider } from "firebase/auth";
+import AuthContex from "../provider/AuthContext";
 
 function Login() {
-  const [user, setUser] = useState(null);
+  const { user,setUser } = useContext(AuthContex);
   const auth = getAuth(app);
   const GoogleProvider = new GoogleAuthProvider();
   const GithubProvider = new GithubAuthProvider();
